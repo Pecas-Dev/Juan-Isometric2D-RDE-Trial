@@ -1,0 +1,16 @@
+# NO LICENSE WAS PRESENT IN THE DOWNLOAD OF THE FILES - LICENSE CREATED BY JUAN F. GUTIERREZ TO ATTRIBUTE CREDITS TO AUTHOR
+
+8-direction Top Down Character
+Last update: October 26, 2018
+
+By: Gamekrazzy
+https://gamekrazzy.itch.io/8-direction-top-down-character
+
+Includes:
+    TopDownCharacter.zip 
+
+LICENCE: This asset pack can be used in both free and commercial projects. You can modify it to suit your own needs.
+
+Creative Commons License:
+This work is licensed under a Creative Commons Attribution CC0 International License.
+

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2cef3c940a2a8a48ab26232fc010327, type: 3}
+  m_Name: Prefabs_Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 4ddcda1271acd4f46b9f81b5df4aefc7, type: 3}
+  title: Prefab Folder
+  sections:
+  - heading: 
+    text: 
+    linkText: 
+    url: 
+  - heading: What is this folder for?
+    text: 
+    linkText: 
+    url: 
+  - heading: 
+    text: The Prefabs folder stores reusable game objects, such as characters, UI
+      elements, etc. Prefabs allow for efficient instantiation and modification,
+      making development more scalable and modular.
+    linkText: 
+    url: 
+  loadedLayout: 1
