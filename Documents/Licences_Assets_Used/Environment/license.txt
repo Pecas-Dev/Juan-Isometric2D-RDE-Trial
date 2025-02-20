@@ -1,0 +1,16 @@
+32 x 32 Pixel Isometric Tiles
+Last update: July 21, 2023
+
+By: scrabling
+https://scrabling.itch.io/pixel-isometric-tiles
+
+
+Includes:
+    isometric tileset.zip
+
+LICENCE: This asset pack can be used in both free and commercial projects. You can modify it to suit your own needs.
+
+Creative Commons License:
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+
+
