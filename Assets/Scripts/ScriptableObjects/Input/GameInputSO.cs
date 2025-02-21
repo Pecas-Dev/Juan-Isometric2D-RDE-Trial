@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 
 namespace JuanIsometric2D.GameInputSystem
@@ -9,7 +9,11 @@ namespace JuanIsometric2D.GameInputSystem
     {
         public Vector2 MovementInput { get; private set; } = Vector2.zero;
 
+        public bool AttackPressed { get; private set; } = false;
+
+
         PlayerInputActions playerInputActions;
+
 
         public void Initialize()
         {
@@ -24,12 +28,16 @@ namespace JuanIsometric2D.GameInputSystem
 
             playerInputActions.Player.PlayerMove.performed += OnMovePerformed;
             playerInputActions.Player.PlayerMove.canceled += OnMoveCanceled;
+
+            playerInputActions.Player.PlayerAttack.performed += OnAttackPerformed;
         }
 
         public void Uninitialize()
         {
             playerInputActions.Player.PlayerMove.performed -= OnMovePerformed;
             playerInputActions.Player.PlayerMove.canceled -= OnMoveCanceled;
+
+            playerInputActions.Player.PlayerAttack.performed -= OnAttackPerformed;
 
             playerInputActions.Disable();
         }
@@ -53,6 +61,23 @@ namespace JuanIsometric2D.GameInputSystem
         }
 
         // ########################################################
+
+
+
+        // ################### ATTACK ##########################
+
+        void OnAttackPerformed(InputAction.CallbackContext context)
+        {
+            AttackPressed = true;
+        }
+
+        public void ResetAttack()
+        {
+            AttackPressed = false;
+        }
+
+        // ########################################################
+
     }
 }
 

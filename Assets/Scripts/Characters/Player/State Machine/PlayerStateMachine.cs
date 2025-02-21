@@ -1,5 +1,6 @@
-using JuanIsometric2D.GameInputSystem;
 using JuanIsometric2D.Animation.Player;
+using JuanIsometric2D.GameInputSystem;
+
 using UnityEngine;
 
 
