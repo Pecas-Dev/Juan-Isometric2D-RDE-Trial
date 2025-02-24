@@ -14,9 +14,53 @@ This repository contains the **Unity Developer Internship Trial** for **Runic Di
 
 I aim to complete all tasks within the **5-day timeframe** while maintaining clean code, best practices, and efficient workflow management.
 
+ -----------------------------------------------------------------
+ 
+ <br>
+
+
+![image](https://github.com/user-attachments/assets/1c618f86-055c-43e4-a337-e773b3154573)
+_Project in Finalized State (Not at Runtime)_
+
+
+
+ <br>
+ 
+  -----------------------------------------------------------------
+
+ <br>
+
+## Controls
+
+<br>
+
+![controllerLayout](https://github.com/user-attachments/assets/49dc673f-fd23-4481-91b8-58f07c3d3d7d)
+
+<br>
+
+![keyboardLayout](https://github.com/user-attachments/assets/c82910a3-bac9-4626-98a9-51a74d9386c4)
+
+
+
+### **Player Controls**
+- **Move Player**: Left Joystick (Gamepad) or **WASD / Arrow Keys** (Keyboard).
+- **Melee Attack (Slash)**: Left Click (Mouse) or Right Trigger **(R2 PlayStation / RT Xbox)**.
+- **Projectile Attack**: Right Click (Mouse) or Left Shoulder **(L1 PlayStation / LB Xbox)**.
+
+### **UI Controls**
+- **Navigate Inventory**: D-Pad **(Up/Down) Gamepad** or **Mouse Pointer**.
+- **Select/Enter Inventory Slot**: **Enter Key (Keyboard)** or Button South **(X PlayStation / A Xbox)**.
+- **Toggle Inventory**: **"I" Key (Keyboard)** or Button North **(Triangle PlayStation / Y Xbox)**.
+
+ <br>
+
+ -----------------------------------------------------------------
+
+ <br>
+
 ## Trial Tasks
 
-### Task 1: Unity Project Setup & GitHub Integration [DevLog 1](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%201/Task%201%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
+### Task 1: Unity Project Setup & GitHub Integration [ (DevLog 1) ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%201/Task%201%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Set up a Unity project with version control in GitHub.
 
@@ -27,7 +71,7 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
 <br>
 
-### Task 2: Isometric Player Movement & Input System [DevLog 2](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%202/Task%202%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
+### Task 2: Isometric Player Movement & Input System [ (DevLog 2) ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%202/Task%202%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Implement isometric movement using Unity’s New Input System.
 
@@ -38,7 +82,7 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
  <br>
 
-### Task 3: AI State Machine for Enemy Behavior [DevLog 3 - 4.1](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4/Task%203-4.1%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
+### Task 3: AI State Machine for Enemy Behavior [ (DevLog 3 - 4.1) ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4/Task%203-4.1%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Implement an AI system using a state machine for enemy behavior.
 
@@ -49,7 +93,7 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
  <br>
 
-### Task 4.1 - 4.2: Implement a Basic Combat System & Implement a Simple Inventory System [DevLog 3(Pathfinding) - 4.1- 4.2 ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4.1-4.2/Task%203(Pathfinding)-4.1-4.2%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
+### Task 4.1 - 4.2: Implement a Basic Combat System & Implement a Simple Inventory System [ (DevLog 3(Pathfinding) - 4.1- 4.2) ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4.1-4.2/Task%203(Pathfinding)-4.1-4.2%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal 4.1**: Create a functional combat system with player and enemy interactions.
 
