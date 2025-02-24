@@ -14,10 +14,9 @@ This repository contains the **Unity Developer Internship Trial** for **Runic Di
 
 I aim to complete all tasks within the **5-day timeframe** while maintaining clean code, best practices, and efficient workflow management.
 
-
 ## Trial Tasks
 
-### Task 1: Unity Project Setup & GitHub Integration
+### Task 1: Unity Project Setup & GitHub Integration [DevLog 1](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%201/Task%201%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Set up a Unity project with version control in GitHub.
 
@@ -28,7 +27,7 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
 <br>
 
-### Task 2: Isometric Player Movement & Input System
+### Task 2: Isometric Player Movement & Input System [DevLog 2](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%202/Task%202%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Implement isometric movement using Unity’s New Input System.
 
@@ -39,7 +38,7 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
  <br>
 
-### Task 3: AI State Machine for Enemy Behavior
+### Task 3: AI State Machine for Enemy Behavior [DevLog 3 - 4.1](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4/Task%203-4.1%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
 **Goal**: Implement an AI system using a state machine for enemy behavior.
 
@@ -50,9 +49,26 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
  <br>
 
-### Task 4: (To Be Chosen)
+### Task 4.1 - 4.2: Implement a Basic Combat System & Implement a Simple Inventory System [DevLog 3(Pathfinding) - 4.1- 4.2 ](<https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial/blob/main/Documents/Dev%20Logs/Task%203-4.1-4.2/Task%203(Pathfinding)-4.1-4.2%20DevLog%20(UNITY%20DEVELOPER%20INTERNSHIP%20TRIAL).pdf>)
 
-**Goal**: (Will be chosen later based on specialization)
+**Goal 4.1**: Create a functional combat system with player and enemy interactions.
+
+- Implement player attacks (projectile/melee) triggered by spacebar/mouse click
+- Create projectile or melee mechanics with proper damage system
+- Add health systems for both player and enemy
+- Implement enemy attack ability with cooldown
+- Create UI elements for health display
+- Add visual feedback for combat interactions
+
+ <br>
+
+**Goal 4.2**: Create a functional inventory system with item management.
+
+- Implement item collection and storage system
+- Create UI-based inventory display with dynamic slots
+- Add item pickup functionality with 'E' key
+- Implement item usage system (e.g., consuming health potions)
+- Create real-time UI updates for inventory changes
 
  <br>
  
@@ -62,30 +78,51 @@ I aim to complete all tasks within the **5-day timeframe** while maintaining cle
 
 ```glsl
 Scripts
-├── Camera               // Scripts related to camera movement and behavior. 
-├── Characters           
-│   ├── Player           // Player character scripts (movement, actions, etc.).        
+├── Characters
+│   ├── Player           // Player character scripts (movement, actions, etc.).
+│   │    ├── Animation
+│   │    ├── Combat
+│   │    ├── StateMachine
+│   │
 │   ├── Enemy            // Enemy behavior and AI scripts.
-│                        
-├── Input                // Handles player input using Unity's Input System.
+│        ├── Ability
+│        ├── Animation
+│        ├── StateMachine
+│
+├── Inventory            // Inventory system management, item handling, and UI logic
+│
+├── Objects              // Core game object implementations like items, projectiles, and health
+│   ├── Health
+│   ├── Items
+│   ├── Projectiles
 │
 ├── ScriptableObjects    // Scriptable Object logic, the SOs will be stored in another folder.
+│   ├── GrassZone
+│   ├── Health
+│   ├── Input
 │
-├── Utility                
-│   ├── StateMachine     // Core state machine logic for Enemy AI.              
+├── UI                   // User interface components, HUD elements, and menu systems
+│
+├── Utility              // Shared utilities, helper functions, and core system implementations
+    ├── StateMachine
+    ├── GrassZone
+    ├── Health
+    ├── Pathfinding
+    ├── VFX
 
 
-/*Last Updated: February 19th, 2025*/
+/*Last Updated: February 23rd, 2025*/
 ```
------------------------------------------------------------------
+
+---
 
  <br>
  
 ## Project Setup
 
-- **Project name**: ```Isometric2DGame```
-- **Unity Version**: ```6000.0.24f1 (2D URP)```
-- **Repository URL**: ```https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial.git```
+- **Project name**: `Isometric2DGame`
+- **Unity Version**: `6000.0.24f1 (2D URP)`
+- **Repository URL**: `https://github.com/Pecas-Dev/Juan-Isometric2D-RDE-Trial.git`
 
  <br>
 
