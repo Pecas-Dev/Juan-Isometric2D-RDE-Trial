@@ -9,20 +9,27 @@ namespace JuanIsometric2D.StateMachine.Enemy
         Transform currentPatrolPoint;
         Transform[] randomizedPatrolPoints;
 
+
         int currentPatrolIndex;
 
-        float arrivalTimer;
-        float waitTimeAtPoint = 2f;
 
-        bool isWaitingAtPoint;
+        float arrivalThreshold = 0.5f;
 
-        public EnemyPatrolState(EnemyStateMachine enemyStateMachine) : base(enemyStateMachine)
+
+        public EnemyPatrolState(EnemyStateMachine enemyStateMachine, int startIndex = -1, Transform[] existingPatrolPoints = null) : base(enemyStateMachine)
         {
+            if (existingPatrolPoints != null)
+            {
+                randomizedPatrolPoints = existingPatrolPoints;
+                currentPatrolIndex = startIndex;
+            }
         }
 
         public override void Enter()
         {
             Debug.Log("Enemy entered Patrol State");
+            m_enemyStateMachine.SetCurrentState(EnemyStateMachine.EnemyState.Patrol);
+
             m_enemyStateMachine.EnemyAnimatorScript.PlayMovement();
 
             if (randomizedPatrolPoints == null || randomizedPatrolPoints.Length == 0)
@@ -32,10 +39,6 @@ namespace JuanIsometric2D.StateMachine.Enemy
             }
 
             currentPatrolPoint = randomizedPatrolPoints[currentPatrolIndex];
-
-            arrivalTimer = 0f;
-
-            isWaitingAtPoint = false;
         }
 
         public override void Tick(float deltaTime)
@@ -50,41 +53,26 @@ namespace JuanIsometric2D.StateMachine.Enemy
 
             float distanceToPatrolPoint = Vector2.Distance(m_enemyStateMachine.transform.position, currentPatrolPoint.position);
 
-            if (distanceToPatrolPoint < 0.1f)
+            if (distanceToPatrolPoint < arrivalThreshold)
             {
-                if (!isWaitingAtPoint)
-                {
-                    isWaitingAtPoint = true;
-                    m_enemyStateMachine.EnemyAnimatorScript.PlayIdle();
-                }
+                int nextPatrolIndex = (currentPatrolIndex + 1) % randomizedPatrolPoints.Length;
 
-                arrivalTimer += deltaTime;
-
-                m_enemyStateMachine.EnemyRigidbody2D.linearVelocity = Vector2.zero;
-                m_enemyStateMachine.EnemyAnimatorScript.UpdateAnimation(Vector2.zero);
-
-                if (arrivalTimer >= waitTimeAtPoint)
-                {
-                    currentPatrolIndex = (currentPatrolIndex + 1) % randomizedPatrolPoints.Length;
-                    currentPatrolPoint = randomizedPatrolPoints[currentPatrolIndex];
-
-                    arrivalTimer = 0f;
-                    isWaitingAtPoint = false;
-
-                    m_enemyStateMachine.EnemyAnimatorScript.PlayMovement();
-                }
-
+                m_enemyStateMachine.SwitchState(new EnemyIdleState(m_enemyStateMachine, true, nextPatrolIndex, randomizedPatrolPoints));
                 return;
             }
 
-            if (isWaitingAtPoint)
+            Vector2 movementDirection;
+
+            if (m_enemyStateMachine.EnemyPathfinding != null)
             {
-                isWaitingAtPoint = false;
-                m_enemyStateMachine.EnemyAnimatorScript.PlayMovement();
+                movementDirection = m_enemyStateMachine.EnemyPathfinding.CalculateMovementDirection(m_enemyStateMachine.transform.position, currentPatrolPoint.position, deltaTime, false);
+            }
+            else
+            {
+                movementDirection = (currentPatrolPoint.position - m_enemyStateMachine.transform.position).normalized;
             }
 
-            Vector2 directionToPatrolPoint = (currentPatrolPoint.position - m_enemyStateMachine.transform.position).normalized;
-            Vector2 isometricDirection = RotateVectorByAngleEnemy(directionToPatrolPoint, -m_enemyStateMachine.IsometricAngle);
+            Vector2 isometricDirection = RotateVectorByAngleEnemy(movementDirection, -m_enemyStateMachine.IsometricAngle);
 
             m_enemyStateMachine.EnemyRigidbody2D.linearVelocity = isometricDirection * m_enemyStateMachine.MoveSpeed;
             m_enemyStateMachine.EnemyAnimatorScript.UpdateAnimation(isometricDirection);

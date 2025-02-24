@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Obstacle
   - Enemy
+  - MotionAnimation
+  - WeaponAnimation
+  - Projectile
+  - GrassZone
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -16,9 +21,9 @@ TagManager:
   - Obstacle
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - Projectile
+  - GrassZone
+  - Item
   - 
   - 
   - 

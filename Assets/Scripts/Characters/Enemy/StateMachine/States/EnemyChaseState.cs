@@ -12,6 +12,7 @@ namespace JuanIsometric2D.StateMachine.Enemy
         public override void Enter()
         {
             Debug.Log("Enemy entered Chase State");
+            m_enemyStateMachine.SetCurrentState(EnemyStateMachine.EnemyState.Chase);
 
             m_enemyStateMachine.EnemyAnimatorScript.PlayMovement();
             m_enemyStateMachine.EnemyAnimatorScript.SetChaseColor();
@@ -33,8 +34,23 @@ namespace JuanIsometric2D.StateMachine.Enemy
                 return;
             }
 
-            Vector2 directionToPlayer = (m_enemyStateMachine.PlayerTransform.position - m_enemyStateMachine.transform.position).normalized;
-            Vector2 isometricDirection = RotateVectorByAngleEnemy(directionToPlayer, -m_enemyStateMachine.IsometricAngle);
+            Vector2 movementDirection;
+
+            if (m_enemyStateMachine.EnemyPathfinding != null)
+            {
+                movementDirection = m_enemyStateMachine.EnemyPathfinding.CalculateMovementDirection(m_enemyStateMachine.transform.position, m_enemyStateMachine.PlayerTransform.position, deltaTime, true);
+            }
+            else
+            {
+                movementDirection = (m_enemyStateMachine.PlayerTransform.position - m_enemyStateMachine.transform.position).normalized;
+            }
+
+            if (movementDirection.magnitude < 0.1f)
+            {
+                movementDirection = (m_enemyStateMachine.PlayerTransform.position - m_enemyStateMachine.transform.position).normalized;
+            }
+
+            Vector2 isometricDirection = RotateVectorByAngleEnemy(movementDirection, -m_enemyStateMachine.IsometricAngle);
 
             m_enemyStateMachine.EnemyRigidbody2D.linearVelocity = isometricDirection * m_enemyStateMachine.MoveSpeed;
             m_enemyStateMachine.EnemyAnimatorScript.UpdateAnimation(isometricDirection);

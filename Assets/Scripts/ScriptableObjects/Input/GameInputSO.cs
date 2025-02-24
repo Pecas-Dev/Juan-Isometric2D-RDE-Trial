@@ -1,5 +1,5 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 namespace JuanIsometric2D.GameInputSystem
@@ -10,6 +10,10 @@ namespace JuanIsometric2D.GameInputSystem
         public Vector2 MovementInput { get; private set; } = Vector2.zero;
 
         public bool AttackPressed { get; private set; } = false;
+        public bool ProjectileShotPressed { get; private set; } = false;
+
+
+        public bool InventoryTogglePressed { get; private set; } = false;
 
 
         PlayerInputActions playerInputActions;
@@ -25,11 +29,17 @@ namespace JuanIsometric2D.GameInputSystem
             playerInputActions = new PlayerInputActions();
 
             playerInputActions.Player.Enable();
+            playerInputActions.UI.Enable();
 
             playerInputActions.Player.PlayerMove.performed += OnMovePerformed;
             playerInputActions.Player.PlayerMove.canceled += OnMoveCanceled;
 
             playerInputActions.Player.PlayerAttack.performed += OnAttackPerformed;
+
+            playerInputActions.Player.ShootProjectile.performed += OnProjectileShot;
+
+
+            playerInputActions.UI.ToggleInventory.performed += OnInventoryToggle;
         }
 
         public void Uninitialize()
@@ -39,9 +49,15 @@ namespace JuanIsometric2D.GameInputSystem
 
             playerInputActions.Player.PlayerAttack.performed -= OnAttackPerformed;
 
+            playerInputActions.Player.ShootProjectile.performed -= OnProjectileShot;
+
+
+            playerInputActions.UI.ToggleInventory.performed -= OnInventoryToggle;
+
             playerInputActions.Disable();
         }
 
+        // --------------------- PLAYER ---------------------------
 
         // ################### MOVEMENT ##########################
 
@@ -78,6 +94,44 @@ namespace JuanIsometric2D.GameInputSystem
 
         // ########################################################
 
+
+
+        // ################### PROJECTILE ##########################
+
+        void OnProjectileShot(InputAction.CallbackContext context)
+        {
+            ProjectileShotPressed = true;
+        }
+
+        public void ResetProjectileShot()
+        {
+            ProjectileShotPressed = false;
+        }
+
+        // ########################################################
+
+
+
+        // ########################################################
+        // ########################################################
+
+
+        // ---------------------- UI ------------------------------
+
+
+        // ################# INVENTORY TOGGLE ######################
+
+        void OnInventoryToggle(InputAction.CallbackContext context)
+        {
+            InventoryTogglePressed = true;
+        }
+
+        public void ResetInventoryToggle()
+        {
+            InventoryTogglePressed = false;
+        }
+
+        // ########################################################
     }
 }
 

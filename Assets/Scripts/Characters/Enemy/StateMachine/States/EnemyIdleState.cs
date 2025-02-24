@@ -8,13 +8,28 @@ namespace JuanIsometric2D.StateMachine.Enemy
         float idleTimer;
         float idleDuration = 2f;
 
-        public EnemyIdleState(EnemyStateMachine enemyStateMachine) : base(enemyStateMachine)
+
+        int nextPatrolIndex;
+
+
+        bool isPatrolPoint;
+
+
+        Transform[] patrolPoints;
+
+
+        public EnemyIdleState(EnemyStateMachine enemyStateMachine, bool isPatrolPoint = false, int nextPatrolIndex = 0, Transform[] patrolPoints = null) : base(enemyStateMachine)
         {
+            this.isPatrolPoint = isPatrolPoint;
+            this.nextPatrolIndex = nextPatrolIndex;
+            this.patrolPoints = patrolPoints;
         }
 
         public override void Enter()
         {
             Debug.Log("Enemy entered Idle State");
+            m_enemyStateMachine.SetCurrentState(EnemyStateMachine.EnemyState.Idle);
+
             m_enemyStateMachine.EnemyAnimatorScript.PlayIdle();
 
             idleTimer = 0f;
@@ -34,7 +49,14 @@ namespace JuanIsometric2D.StateMachine.Enemy
 
             if (idleTimer >= idleDuration)
             {
-                m_enemyStateMachine.SwitchState(new EnemyPatrolState(m_enemyStateMachine));
+                if (isPatrolPoint && patrolPoints != null)
+                {
+                    m_enemyStateMachine.SwitchState(new EnemyPatrolState(m_enemyStateMachine, nextPatrolIndex, patrolPoints));
+                }
+                else
+                {
+                    m_enemyStateMachine.SwitchState(new EnemyPatrolState(m_enemyStateMachine));
+                }
             }
         }
 

@@ -1,10 +1,17 @@
 using UnityEngine;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 namespace JuanIsometric2D.Animation.Player
 {
     public class PlayerAnimator : MonoBehaviour
     {
+        readonly string[] scenesWithoutCombat = { "Isometric2D_Task2", "Isometric2D_Task3" };
+
+        bool isCombatDisabledScene;
+
+
         const string F_PLAYER_SPEED = "playerSpeed";
         const string F_PLAYER_HORIZONTAL = "playerHorizontal";
         const string F_PLAYER_VERTICAL = "playerVertical";
@@ -12,8 +19,6 @@ namespace JuanIsometric2D.Animation.Player
         const string F_ATTACK_HORIZONTAL = "attackHorizontal";
         const string F_ATTACK_VERTICAL = "attackVertical";
 
-
-        SpriteRenderer playerSpriteRenderer;
 
         [SerializeField] Animator playerMotionAnimator;
         [SerializeField] Animator playerCombatAnimator;
@@ -26,15 +31,43 @@ namespace JuanIsometric2D.Animation.Player
         Vector2 currentDirection;
 
 
+        SpriteRenderer playerSpriteRenderer;
+
+
         void Awake()
         {
+            isCombatDisabledScene = scenesWithoutCombat.Contains(SceneManager.GetActiveScene().name);
+
+            Animator[] childAnimators = GetComponentsInChildren<Animator>();
+
+            foreach (Animator animatiors in childAnimators)
+            {
+                if (animatiors.gameObject.CompareTag("MotionAnimation"))
+                {
+                    playerMotionAnimator = animatiors;
+                }
+                else if (!isCombatDisabledScene && animatiors.gameObject.CompareTag("WeaponAnimation")) 
+                {
+                    playerCombatAnimator = animatiors;
+                }
+            }
+
             playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
             currentDirection = Vector2.down;
+        }
+
+        void Start()
+        {
+            LogNullReferenceErrors();
         }
 
         void Update()
         {
-            CheckAndResetAttackAnimation();
+            if (!isCombatDisabledScene)
+            {
+                CheckAndResetAttackAnimation();
+            }
         }
 
         void CheckAndResetAttackAnimation()
@@ -45,16 +78,17 @@ namespace JuanIsometric2D.Animation.Player
             }
         }
 
-        public void UpdateAnimation(Vector2 movementInput)
+        public void UpdateAnimation(Vector2 movementInput, float speedMultiplier)
         {
             bool isMoving = movementInput.magnitude > 0;
 
-            playerMotionAnimator.SetFloat(F_PLAYER_SPEED, isMoving ? 1f : 0f);
+            playerMotionAnimator.SetFloat(F_PLAYER_SPEED, isMoving ? speedMultiplier : 0f);
 
             if (isMoving)
             {
                 playerMotionAnimator.SetFloat(F_PLAYER_HORIZONTAL, movementInput.x);
                 playerMotionAnimator.SetFloat(F_PLAYER_VERTICAL, movementInput.y);
+
                 currentDirection = movementInput;
             }
 
@@ -62,11 +96,15 @@ namespace JuanIsometric2D.Animation.Player
             {
                 playerMotionAnimator.SetFloat(F_PLAYER_HORIZONTAL, 0.0f);
                 playerMotionAnimator.SetFloat(F_PLAYER_VERTICAL, 0.0f);
+
                 currentDirection = Vector2.down;
             }
 
-            playerCombatAnimator.SetFloat(F_ATTACK_HORIZONTAL, currentDirection.x);
-            playerCombatAnimator.SetFloat(F_ATTACK_VERTICAL, currentDirection.y);
+            if (!isCombatDisabledScene && playerCombatAnimator != null)
+            {
+                playerCombatAnimator.SetFloat(F_ATTACK_HORIZONTAL, currentDirection.x);
+                playerCombatAnimator.SetFloat(F_ATTACK_VERTICAL, currentDirection.y);
+            }
         }
 
         public void PlayIdle()
@@ -81,10 +119,25 @@ namespace JuanIsometric2D.Animation.Player
 
         public void PlayAttack()
         {
-            playerCombatAnimator.SetFloat(F_ATTACK_HORIZONTAL, currentDirection.x);
-            playerCombatAnimator.SetFloat(F_ATTACK_VERTICAL, currentDirection.y);
+            if (!isCombatDisabledScene && playerCombatAnimator != null)
+            {
+                playerCombatAnimator.SetFloat(F_ATTACK_HORIZONTAL, currentDirection.x);
+                playerCombatAnimator.SetFloat(F_ATTACK_VERTICAL, currentDirection.y);
 
-            playerCombatAnimator.CrossFadeInFixedTime("PlayerAttackBlendTree", 0.01f);
+                playerCombatAnimator.CrossFadeInFixedTime("PlayerAttackBlendTree", 0.01f);
+            }
+        }
+
+        void LogNullReferenceErrors()
+        {
+            if (playerMotionAnimator == null)
+            {
+                Debug.LogError("Motion animator not found!");
+            }
+            if (playerCombatAnimator == null && !isCombatDisabledScene)
+            {
+                Debug.LogError("Combat animator not found!");
+            }
         }
     }
 }

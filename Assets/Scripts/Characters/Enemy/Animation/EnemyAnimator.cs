@@ -5,14 +5,17 @@ namespace JuanIsometric2D.Animation.Enemy
 {
     public class EnemyAnimator : MonoBehaviour
     {
-        const string F_ENEMY_SPEED = "enemySpeed";
         const string F_ENEMY_HORIZONTAL = "enemyHorizontal";
         const string F_ENEMY_VERTICAL = "enemyVertical";
+        const string F_ENEMY_SPEED = "enemySpeed";
+
+
+        Color defaultColor;
+
 
         SpriteRenderer enemySpriteRenderer;
         Animator enemyAnimator;
 
-        Color defaultColor;
 
         void Awake()
         {

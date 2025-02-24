@@ -5,7 +5,7 @@ namespace JuanIsometric2D.StateMachine
 {
     public abstract class StateMachine : MonoBehaviour
     {
-        State currentState;
+        protected State currentState;
 
         public void SwitchState(State newState)
         {

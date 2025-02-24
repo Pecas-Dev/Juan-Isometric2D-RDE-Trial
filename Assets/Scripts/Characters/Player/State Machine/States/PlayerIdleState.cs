@@ -12,15 +12,17 @@ namespace JuanIsometric2D.StateMachine.Player
         public override void Enter()
         {
             Debug.Log("Player is in Idle State");
+            m_playerStateMachine.SetCurrentState(PlayerStateMachine.PlayerState.Idle);
 
             m_playerStateMachine.PlayerAnimatorScript.PlayIdle();
-
-            m_playerStateMachine.PlayerAnimatorScript.UpdateAnimation(Vector2.zero);
+            m_playerStateMachine.PlayerAnimatorScript.UpdateAnimation(Vector2.zero, 1f);
         }
 
         public override void Tick(float deltaTime)
         {
             Vector2 input = m_playerStateMachine.PlayerGameInputSO.MovementInput;
+
+            m_playerStateMachine.HandleInventoryInput();
 
             if (input != Vector2.zero)
             {
